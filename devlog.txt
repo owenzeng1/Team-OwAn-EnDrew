@@ -1,4 +1,4 @@
-Andrew 01-11-16
+Andrew Lin 01-11-16
   -Updated Tile.java
     -Added Accessor for instance Vars
     -Added Mutators for instance Vars
@@ -7,3 +7,17 @@ Andrew 01-11-16
     
   -Updated Board.java
     -Updated toString. Prints out board
+    
+Owen Zeng 01-11-16
+  -Created all units and added each units stats
+    - Archer.java
+    - Cavalier.java
+    - Cleric.java
+    - Knight.java
+    - Lord.java
+    - Myrmidon.java
+  -Created all weapons
+  -Minor changes to Tile.java for the sake of asthetics
+  -Started work on FireEmblem.java (the driver)
+  -Brainstormed the plot/story of the game
+  
