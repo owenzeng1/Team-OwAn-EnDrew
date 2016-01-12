@@ -1,1 +1,9 @@
-
+Andrew 01-11-16
+  -Updated Tile.java
+    -Added Accessor for instance Vars
+    -Added Mutators for instance Vars
+    -Added a toString + getInfo method
+    -Fully tested as of now
+    
+  -Updated Board.java
+    -Updated toString. Prints out board
