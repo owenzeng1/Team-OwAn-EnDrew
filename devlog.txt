@@ -21,3 +21,7 @@ Owen Zeng 01-11-16
   -Started work on FireEmblem.java (the driver)
   -Brainstormed the plot/story of the game
   
+Andrew Lin 01-13-16
+  -Fixed Map Asthetics
+  -Improved functionality for creating better/more logical maps
+  -In the process of turning this program into a map editing software....
