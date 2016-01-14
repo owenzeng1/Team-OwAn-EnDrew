@@ -25,3 +25,13 @@ Andrew Lin 01-13-16
   -Fixed Map Asthetics
   -Improved functionality for creating better/more logical maps
   -In the process of turning this program into a map editing software....
+  
+Owen Zeng 01-13-16
+  -Creation of Character.java as an interface for all the characters
+  -Started coding main method of driver class FireEmblem.java
+  -Created all basic weapons besides Tomes and Staves
+    -Bronze
+    -Iron
+    -Steel
+    -Silver
+  -Researched actual Fire Emblem damage formulas
