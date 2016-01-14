@@ -29,7 +29,7 @@ Andrew Lin 01-13-16
 Owen Zeng 01-13-16
   -Creation of Character.java as an interface for all the characters
   -Started coding main method of driver class FireEmblem.java
-  -Created all basic weapons besides Tomes and Staves
+  -Created all basic weapons besides Bows Tomes and Staves
     -Bronze
     -Iron
     -Steel
