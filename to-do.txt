@@ -1,10 +1,11 @@
 Andrew Lin 
-  -Need to implement numbers along the sides of the board.
-  -Need to hardcode at least two default board using map making algorithm
-  -Need to implement toString to also print the unit that currently exists on a tile.
-  -Need to finish the system of map editing
-  -Need to test all above codes.
-  -Need to implement necessary exceptions in Board.java
+  -Need to implement numbers along the sides of the board. (1/16)
+  -Need to hardcode at least two default board using map making algorithm (1/16)
+  -Need to implement toString to also print the unit that currently exists on a tile. (1/17)
+  -Need to finish the system of map editing (1/17)
+  -Need to test all above codes. (1/17)
+  -Need to implement necessary exceptions in Board.java (1/17)
+  -Create Shops.java (1/17)
 
 Owen Zeng
   -Implementation of "special" weapons (1 for each category) and ranged weapons: magic tomes an staves (1/16)
