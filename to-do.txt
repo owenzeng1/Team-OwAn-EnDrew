@@ -9,7 +9,7 @@ Andrew Lin
 
 Owen Zeng
   -Implementation of "special" weapons (1 for each category) and ranged weapons: magic tomes an staves (1/16)
-  -Need to draw out the plot more (indefinite, getting the game to work first is most important)
+  -Enemy characters and the AI.... (1/18)
   -Level planning (indefinite, getting the game to work first is most important)
   -Implementation of the attack function (1/15)
     -accuracy
@@ -18,8 +18,9 @@ Owen Zeng
     -counter attack
     -double strike (if speed is 5 higher than opponent)
     -durability decreasing and weapons breaking
-  -Inventory for each character (1/17)
-    -buying items from shops
+  -Main method for driver class FireEmblem.java
+    -plot
+    -
 Both 
   -Colors?? (indefinite, getting the game to work first is most important)
   
