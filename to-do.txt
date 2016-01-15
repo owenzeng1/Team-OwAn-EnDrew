@@ -1,0 +1,8 @@
+Andrew Lin 
+  -Need to implement numbers along the sides of the board.
+  -Need to hardcode at least two default board suing map making algorithm
+  -Need to implement toString to also print the unit that currently exists on a tile.
+  -Need to finish the system of map editing
+  -Need to test all above codes.
+  -Need to implement necessary exceptions in Board.java
+  
