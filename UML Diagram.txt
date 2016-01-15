@@ -9,3 +9,39 @@ public class FireEmblem{
     //Methods
     public void play() //Primary method for game play 
     public static void main(String[] args) //Testing purposes
+    
+    
+public interface Character{
+    abstract String nameOf;
+    abstract int HP;
+    abstract int ATK;
+    abstract int DEF;
+    abstract int MAG;
+    abstract int RES;
+    abstract int SKL;
+    abstract int SPD;
+    abstract int LUK;
+    abstract int maxMovement;
+    
+    public void setHP(int newHP)//for mutating HP
+    MUTATORS for all stats
+    
+    public int getHP()//for accessing HP
+    ACCESSORS for all stats
+    
+    public void attack(Character attacker , Character defender)//    IN PROGRESS will handle the damage calcs and dealing
+
+
+public class Archer implements Character//this is for all classes, not just archer
+    setting the abstract variables in Character to stats specific to each class
+    
+
+public interface Axe//this applies to all weapons
+    private String weaponType = "A";// L for lances and S for swords nothing for tomes, bows and staves
+    abstract int might;
+    abstract int hitRate;
+    abstract int critRate;
+    abstract int durability;
+    public String getWeaponType()//returns weaponType to check for weapon advantage in the attack function
+    public int getMight()//Accessors for all stats
+     public void setHit(int newHit)//Mutators for all stats
