@@ -7,18 +7,18 @@ Andrew Lin
   -Need to implement necessary exceptions in Board.java
 
 Owen Zeng
-  -Implementation of "special" weapons (1 for each category) and ranged weapons: magic tomes an staves
-  -Need to draw out the plot more
-  -Level planning
-  -Implementation of the attack function
+  -Implementation of "special" weapons (1 for each category) and ranged weapons: magic tomes an staves (1/16)
+  -Need to draw out the plot more (indefinite, getting the game to work first is most important)
+  -Level planning (indefinite, getting the game to work first is most important)
+  -Implementation of the attack function (1/15)
     -accuracy
     -evasion
     -crit chance
     -counter attack
     -double strike (if speed is 5 higher than opponent)
     -durability decreasing and weapons breaking
-  -Inventory for each character
+  -Inventory for each character (1/17)
     -buying items from shops
 Both 
-  -Colors??
+  -Colors?? (indefinite, getting the game to work first is most important)
   
