@@ -1,0 +1,11 @@
+import cs1.Keyboard; //Allows user interaction
+
+public class FireEmblem{
+    //Instance Vars
+    private int level = 0; 
+    private int gender = -1;
+    private String playerName = "";
+    
+    //Methods
+    public void play() //Primary method for game play 
+    public static void main(String[] args) //Testing purposes
