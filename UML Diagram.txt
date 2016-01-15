@@ -14,7 +14,7 @@ public class FireEmblem
     public static void main(String[] args) //Testing purposes
     
     
-public interface Character
+public abstract Character
     abstract String nameOf;
     abstract int HP;
     abstract int ATK;
@@ -25,31 +25,60 @@ public interface Character
     abstract int SPD;
     abstract int LUK;
     abstract int maxMovement;
-    
-    public void setHP(int newHP)//for mutating HP
+    ========================================
     MUTATORS for all stats
-    
-    public int getHP()//for accessing HP
+    public void setHP(int newHP)//for mutating HP
+    ========================================
     ACCESSORS for all stats
-    
+    public int getHP()//for accessing HP
+    ========================================
     public void attack(Character attacker , Character defender)//    IN PROGRESS will handle the damage calcs and dealing
+    public static void main( String[] args )  //Tester
 
+//Applies to all classes below
+public class Archer extends Character
+public class Knight extends Character
+public class Cavalier extends Character
+public class Healer extends Character
+public class Lord extends Character
+public class Mage extends Character
+public class Myrmidon extends Character
+    -setting the abstract variables in Character to stats specific to each class
+    -public static void main( String[] args )  //Tester
 
-public class Archer implements Character //this is for all classes, not just archer
-    setting the abstract variables in Character to stats specific to each class
+public abstract Weapons; //Superclass for all weapons
+    private abstract String weaponType;
+    private abstract int might;
+    private abstract int hitRate;
+    private abstract int critRate;
+    private abstract int durability;
     
-
-public interface Axe //this applies to all weapons
+//this applies to all weapons
+public abstract Axe extends Weapons
+public abstract Sword extends Weapons
+public abstract Tomes extends Weapons
+public abstract Bows extends Weapons
+public abstract Staves extends Weapons
     private String weaponType = "A";// L for lances and S for swords nothing for tomes, bows and staves
-    abstract int might;
-    abstract int hitRate;
-    abstract int critRate;
-    abstract int durability;
+    private abstract int might;
+    private abstract int hitRate;
+    private abstract int critRate;
+    private abstract int durability;
     public String getWeaponType() //returns weaponType to check for weapon advantage in the attack function
     public int getMight() //Accessors for all stats
     public void setHit(int newHit) //Mutators for all stats
+    public static void main( String[] args );  //Tester
 
-public class Board {
+//This applies to all weapons
+public Bronze<Axe> extends <Axe>
+public Iron<Axe> exetnds <Axe>
+public Silver<Axe> extends <Axe>
+public Steel<Axe> extends <Axe>
+    -Instantiantes all the instance vars in the super class
+    -Methods except main methods are the same for all classes.
+    -public static void main( String[] args );  //Tester
+    
+public class Board 
     private final static int BOARD_SIZE = 8;
     private Tile[][] board;
     //Constructors - Initalizes Board
@@ -63,9 +92,9 @@ public class Board {
     public String toString() //return String representation of this board
     public void populate() //Fills in the rest of the array datasets with Plains Tiles
     public void crtTerrain (int a, int b, int dim_x, int dim_y, int terrain) //Prints Different VAlues 
-    public static void main( String[] args ) { //Tester
+    public static void main( String[] args )  //Tester
 
-public class Tile {
+public class Tile 
     private int x_cor;
     private int y_cor;
     private boolean hasUnits;
@@ -91,13 +120,13 @@ public class Tile {
     public int setTerrain(int terrain) //sets the terrain of the tile
     public String setUnit(String newUnit) //sets the unit of the tile
     //=========================================================
+    
     public String getInfo() //Print out values of all instance variables
     public String toString() //Prints the Picture of the Terrain/Units on it 
     public static void main (String [] args) //For testing purposes
     
     //METHODS BEING IMPLEMENTED
     toString()-In Board.java
-    
     
     //CLASSES/METHODS NOT YET IMPLEMENTED
     public class Shops() //Will be used in Tile.java
