@@ -42,3 +42,6 @@ Andrew Lin 01-14-16
   -Edited toString method in board.java to allow above implementations
   -Created a crt() class in FireEmblem.java to hold the alogrithm of map creations.
   -Implement a name in board.java to facilitate interaction between map selection/organization
+  
+Owen Zeng 1-15-16
+  -Finished up programming the Tomes and Staves
