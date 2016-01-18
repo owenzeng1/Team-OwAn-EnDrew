@@ -47,4 +47,9 @@ Owen Zeng 1-15-16
   -Finished up programming the Tomes
 
 Owen Zeng 1-17-16
+
+Andrew Lin 1-17-16
+  -Finished map creating software
+  -Added Shops.java for the Shop functionality
+  -Simplified User input
   
