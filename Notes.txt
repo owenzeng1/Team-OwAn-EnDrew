@@ -1,0 +1,1 @@
+if I use 3D arrays that's a stretch we can use and it would allow inventory to be implemented easily [a][a][3] and accessed decently easily. weapon might and accuracy could be quickly calculated.
