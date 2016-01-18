@@ -3,4 +3,19 @@ If Weapons are part of a Tile,
 Then I would have to program Board as a 3D array. That's a "stretch" and it would allow inventory to be implemented easily [a][a][3] and accessed decently easily with indeces. Weapon might and accuracy could be quickly returned and thus an attack can be calculated pretty efficiently. The downside would be that when moving a character, we must also program it so that the inventory moves as well....which doesn't seem too hard because it would just be a for loop copying and pasting [a][a] over since the weapons don't need to be moved individually. This would make moving from level to level easier as well because asking a Character to move() would copy all its Weapons over (bought ones as well) because that would be part of the move function inherently should we decide to go down this path. Also equipping different items would be easy as well: a simple Board[xcor][ycor][0] swap with Board[xcor][ycor][<# of Weapon swapped>]
 
 If Weapons are part of a Character,
+The Weapons class system, which has already been created, and easily become a variable in Object. This is no different than how Board or Tile or Shops are Structure. 
+      
+      Shops are an Object in Tile which is an Object in Board.
+
+Having Weapons in Character also allows more easily for the exchanged/usage of weapons. It also shows for better organization. 
+For Example: In a Character class instance vars could be
+          Weapon a = new <Default Constructor of Specific Weapon>
+          Weapon b = new <Default Constructor of Specific Weapon>
+          Weapon c = new <Default Constructor of Specific Weapon>
+Changing the Weapons should also be easy. Just overwrite a variable with a new Weapon-type constructor.
+I also don't see why Weapons would have to be an array. That doesn't really make sense???
+
+Using the method i have describe above. It's very easy to simply do: Bob.a.calculateDmg(). It would also be a lot more efficient because it gets rid ot the redundancy between Character and Weapons. (Since Character and Weapons are acting in almost a smiliar fashion, why go through the trouble of doing something twice)
+
+XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 Then an Inventory.java file would have to be made and programmed. The Character and Inventory would work together like Board and Tile, Character calling on Inventory as necessary. This would make Board deal with 2D arrays which are certainly more familiar to us. The issue with that is that damage calculations would have to look at the Character, look at it's inventory (which would be an array), then return might and accuracy to be used as part of the calculation. Moving the weapons along with the Character would be easier than the above method because Characters carry the inventory. Moving from level to level would be easy too. Equipping Weapons would be difficult though since that woudl require looking at the Character, looking at its array and swapping two elements in its array.
