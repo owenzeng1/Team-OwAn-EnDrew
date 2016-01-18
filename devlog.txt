@@ -44,4 +44,7 @@ Andrew Lin 01-14-16
   -Implement a name in board.java to facilitate interaction between map selection/organization
   
 Owen Zeng 1-15-16
-  -Finished up programming the Tomes and Staves
+  -Finished up programming the Tomes
+
+Owen Zeng 1-17-16
+  
