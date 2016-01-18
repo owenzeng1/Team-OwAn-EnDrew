@@ -17,5 +17,7 @@ I also don't see why Weapons would have to be an array. That doesn't really make
 
 Using the method i have describe above. It's very easy to simply do: Bob.a.calculateDmg(). It would also be a lot more efficient because it gets rid ot the redundancy between Character and Weapons. (Since Character and Weapons are acting in almost a smiliar fashion, why go through the trouble of doing something twice)
 
+With the current way Board and Tile are structure, it will be almost impossible to implement 3D arrays without consuming an enormous amount of time and albeit futile effort
+
 XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 Then an Inventory.java file would have to be made and programmed. The Character and Inventory would work together like Board and Tile, Character calling on Inventory as necessary. This would make Board deal with 2D arrays which are certainly more familiar to us. The issue with that is that damage calculations would have to look at the Character, look at it's inventory (which would be an array), then return might and accuracy to be used as part of the calculation. Moving the weapons along with the Character would be easier than the above method because Characters carry the inventory. Moving from level to level would be easy too. Equipping Weapons would be difficult though since that woudl require looking at the Character, looking at its array and swapping two elements in its array.
