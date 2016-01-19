@@ -5,7 +5,8 @@ Andrew Lin
   -Need to finish the system of map editing (1/17)
   -Need to test all above codes. (1/17)
   -Need to implement necessary exceptions in Board.java (1/17)
-  -Create Shops.java  (1/17)
+  -Need to implement Diagonal Functionality
+  -Create Shops.java  (1/25)
       -Implement necessary methods and instance vars, such as buying object
       
 Owen Zeng
