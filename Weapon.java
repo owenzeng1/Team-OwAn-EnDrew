@@ -6,10 +6,31 @@ public abstract class Weapon{
     public int hit;
     public int range;
     public int durability;
+    public int fullDur;
+    public int worth;
     
     //Basic functions
     public boolean isBroken(){
         return durability == 0;
+    }
+    public String toString(){
+        String retStr = "Weapon: " + name + "\n";
+        retStr += "Type: " + weaponType + "\n";
+        retStr += "Might: " + might + "\n";
+        retStr += "Crit: " + crit + "\n";
+        retStr += "Hit: " + hit + "\n";
+        if (weaponType.equals("SA") || weaponType.equals("T")){
+            retStr += "Range: 1-2" + "\n";
+        }
+        else if (weaponType.equals("SB")){
+            retStr += "Range: 2-3" + "\n";
+        }
+        else {
+            retStr += "Range: " + range + "\n";
+        }
+        retStr += "Durability: " + durability + "\n";
+        retStr += "Worth: " + worth + "\n";
+        return retStr;
     }
     
     //Accessors
@@ -48,5 +69,10 @@ public abstract class Weapon{
     }
     public void setDur(int newDur){
         this.durability = newDur;
+    }
+    
+    public static void main (String[] args){
+        Weapon destroyer = new BronzeLance();
+        System.out.println(destroyer);
     }
 }
