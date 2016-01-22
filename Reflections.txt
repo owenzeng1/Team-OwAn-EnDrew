@@ -1,0 +1,31 @@
+Obstacles Overcome (and how!)
+Unresolved Issues
+Cool Stuff Learned (conceptual and/or practical)
+Mid-development Design Changes (and why!)
+Lessons Learned (...which you might apply to future projects, CS or otherwise) ...have you achieved flow?
+
+Andrew Lin
+1. Ome major obstacles that my partner Owen and I overcame was arguing over the structure of our Inventory class and its relation to 
+other classes. Owen wanted to append the inventory as an array to Board.java ultimately creating a 3D array. I, on the other hand, wanted 
+to create a new object in Character.java. Most of our problems stemmed from misundrstanding and a misrepresentation of each other's ideas. 
+By writing both of our arguments under notes.txt in this github repo. This really helped to clarify what our ideas really were. A in-person 
+discussion and examination of our UML diagram also led us to an agreement of creating a new Object array of length 3 in Character.java 
+(a combination of ideas).
+Beyond this, I only encountered minor issues, like being unable to figure out how to code things a certain way, or in the most robustified way.
+Thankfully, Keys to Sucess and Code Revisions helped with that.
+
+2. Some current unresolved issues that my group faces is the hierachy of Characters and Weapons. While we had initially set up a basic structure 
+of abstract classes, we found that this didn't exactly work with the current Board and Inventory system. Thus, we scraped that whole part
+of the game structure, revisted our flowchart, brainstormed and decided upon a better class structure which we are currently implementing
+
+3. While doing this project, I learned cool things like being able to change the background color of an Area in the terminal using ANSI codes
+and learning more about some java classes, such as HashMap, which really helped to simplify my code.
+
+4. As mentioned before, our biggest Mid-development Design change was restructuring the Character and Weapons herarchy in relation to 
+Inventory.java and Board.java. We did this because we found that our old design simply did not work well with what we already had.
+
+5. Lessons that I learned from doing this project, was mainly work and coding ethic. I really found the usefulness of commenting my code 
+commenting out notes here and there, especially after I figured out difficult code that I didn't understand initially. I also valued setting up
+an schedule, creating flowcharts and UML Diagrams to help organize my thought. I also learned to communicate with my partners efffectively
+and to make them aware of what I was coding.
+
