@@ -1,6 +1,9 @@
-//import Weaponry.Weapon;
+import cs1.Keyboard;
+
 public class Shop {
-    //private Weapon a;
-    //private Weapon b;
-    //private Weapon c;
+    public Shop(int level){
+        if (level == 0){
+            
+        }
+    }
 }

@@ -1,10 +1,13 @@
-public class Ashaman extends Character{
+public class Ashaman extends Shepherds{
     //Total stats: 47, Growths: 18.5
     //Role: Mage, Weapons: Tomes only
     public Ashaman(){
         Weapon[] inventory = new Weapon[3];
         inventory[0] = new Wind();
         name = "Asha'man";
+        allegiance = "Shepherds";
+        symbol = " M ";
+        color = "";
         level = 0;
         experience = 0;
         maxHP = 17;
@@ -17,9 +20,12 @@ public class Ashaman extends Character{
         SPD = 6;
         LUK = 1;
         maxMove = 4;
+        drop = 0;
     }
     
     public void levelUp(String message){
+        if (level < 5){
+        System.out.println(message);
         level += 1;
         experience -= 100;
         maxHP = (int) (17 + level * 2.5);
@@ -31,5 +37,9 @@ public class Ashaman extends Character{
         SKL = (int)(3 + level * 1.5);
         SPD = 6 + level * 2;
         LUK = 1 + level * 2;
+        }
+        else {
+            experience = 99;
+        }
     }
 }

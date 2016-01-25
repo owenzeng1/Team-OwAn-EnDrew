@@ -1,10 +1,13 @@
-public class Lucien extends Character{
+public class Lucien extends Shepherds{
     //Total stats: 49, Growths: 19.25
     //Role: Myrmidon, Weapons: Sword only
     public Lucien(){
         Weapon[] inventory = new Weapon[3];
         inventory[0] = new BronzeSword();
         name = "Lucien";
+        allegiance = "Shepherds";
+        symbol = " S ";
+        color = "";
         level = 0;
         experience = 0;
         maxHP = 17;
@@ -17,9 +20,12 @@ public class Lucien extends Character{
         SPD = 8;
         LUK = 6;
         maxMove = 4;
+        drop = 0;
     }
     
     public void levelUp(String message){
+        if (level < 5){
+        System.out.println(message);
         level += 1;
         experience -= 100;
         maxHP = (int)(17 + level * 3.5);
@@ -31,5 +37,9 @@ public class Lucien extends Character{
         SKL = 8 + level * 4;
         SPD = 8 + level * 4;
         LUK = (int)(6 + level * 2.5);
+        }
+        else {
+            experience = 99;
+        }
     }
 }

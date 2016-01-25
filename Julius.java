@@ -1,10 +1,13 @@
-public class Julius extends Character{
+public class Julius extends Shepherds{
     //Total stats: 46, Growths: 18.75
     //Role: Healer, Weapons: Staffs only
     public Julius(){
         Weapon[] inventory = new Weapon[3];
         inventory[0] = new Heal();
-        name = "Oliver";
+        name = "Julius";
+        allegiance = "Shepherds";
+        symbol = " H ";
+        color = "";
         level = 0;
         experience = 0;
         maxHP = 15;
@@ -17,9 +20,12 @@ public class Julius extends Character{
         SPD = 3;
         LUK = 7;
         maxMove = 4;
+        drop = 0;
     }
     
     public void levelUp(String message){
+        if (level < 5){
+        System.out.println(message);
         level += 1;
         experience -= 100;
         maxHP = 15 + level * 2;
@@ -31,5 +37,9 @@ public class Julius extends Character{
         SKL = 5 + level * 2;
         SPD = (int)(5 + level * 2.5);
         LUK = (int)(5 + level * 3.5);
+        }
+        else {
+            experience = 99;
+        }
     }
 }

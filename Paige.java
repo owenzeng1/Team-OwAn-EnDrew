@@ -1,10 +1,13 @@
-public class Paige extends Character{
+public class Paige extends Shepherds{
     //Total stats: 52, Growths: 19.5
     //Role: Knight, Weapons: Axes only
     public Paige(){
         Weapon[] inventory = new Weapon[3];
         inventory[0] = new BronzeAxe();
         name = "Paige";
+        allegiance = "Shepherds";
+        symbol = " K ";
+        color = "";
         level = 0;
         experience = 0;
         maxHP = 22;
@@ -17,9 +20,12 @@ public class Paige extends Character{
         SPD = 3;
         LUK = 7;
         maxMove = 3;
+        drop = 0;
     }
     
     public void levelUp(String message){
+        if (level < 5){
+        System.out.println(message);
         level += 1;
         experience -= 100;
         maxHP = 22 + level * 5;
@@ -31,5 +37,9 @@ public class Paige extends Character{
         SKL = 6 + level * 2;
         SPD = (int)(3 + level * 1.5);
         LUK = (int)(7 + level * 2.5);
+        }
+        else {
+            experience = 99;
+        }
     }
 }

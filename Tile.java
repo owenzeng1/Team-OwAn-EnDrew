@@ -3,11 +3,22 @@ public class Tile {
     private int y_cor;
     private boolean hasUnits;
     private int terrain;
-    private String unit;
-    private Shop s;
-    private static final String[] TERRAIN = {"Nothing","Plain", "Forest", "Desert", "Moutain", "Fort", "River", "Shop"};
-    private static final String[] TERRAINPIC = {"   ", "   "," O ", " - ", " ^ ", "[_]", " ~ ", " S "};
+    private Unit fighter;
+    private static final String[] TERRAIN = {"Nothing","Plain", "Forest", "Desert", "Moutain", "Fort", "River"};
+    private static final String[] TERRAINPIC = {"", "","\u001B[42m", "\u001B[43m", "\u001B[41m", "\u001B[45m", "\u001B[44m"};
     //0- Nonexistant (need to initalize), 1-Plain, 2-Forest, 3-Desert, 4-Moutain, 5-Fort, 6-Rivers
+    
+    /*============================================================
+ ANSI_RESET = "\u001B[0m";
+ ANSI_BLACK = "\u001B[30m";
+ ANSI_RED = "\u001B[31m";
+ ANSI_GREEN = "\u001B[32m";
+ ANSI_YELLOW = "\u001B[33m";
+ ANSI_BLUE = "\u001B[34m";
+ ANSI_PURPLE = "\u001B[35m";
+ ANSI_CYAN = "\u001B[36m";
+ ANSI_WHITE = "\u001B[37m";
+=============================*/
     
     //=======================DEFAULT CONSTRUCTORS====================
     public Tile() {
@@ -15,7 +26,8 @@ public class Tile {
         this.y_cor = 0;
         hasUnits = false;
         terrain = 0;
-        unit = "   ";
+        Unit a = new BlankUnit();
+        fighter = a;
     }
     
     public Tile(int x_cor, int y_cor) {
@@ -23,7 +35,8 @@ public class Tile {
         this.y_cor = y_cor;
         hasUnits = false;
         terrain = 0;
-        unit = "   ";
+        Unit a = new BlankUnit();
+        fighter = a;
     }
     
     public Tile(int x_cor, int y_cor, int terrain) {
@@ -31,8 +44,8 @@ public class Tile {
         this.y_cor = y_cor;
         hasUnits = false;
         this.terrain = terrain;
-        if (terrain == 7) {s = new Shop();}
-        unit = "   ";
+        Unit a = new BlankUnit();
+        fighter = a;
     }
     
     //==========================================================
@@ -53,10 +66,13 @@ public class Tile {
     public String getTerrain() {
         return TERRAIN[this.terrain];
     }
-    
-    public String getUnit() {
-        return unit;
+    public Unit getFighter(){
+        return fighter;
     }
+    
+    /*public Unit getUnit() {
+        return unit;
+    } */
     //=========================================================
     
     //======================MUTATORS===========================
@@ -65,25 +81,28 @@ public class Tile {
         return this.terrain;
     }
     
-    public String setUnit(String newUnit) {
-        String temp = unit;
-        unit = newUnit;
-        return temp;
+    public void setUnit(Unit unit) {
+        hasUnits = true;
+        this.fighter = unit;
+        
     }
     //=========================================================
     
     public String getInfo() {
-        String retStr = "Location: (" + x_cor + "," + y_cor + ")" + "\n" + "Terrain: " + getTerrain() + "\nExistingUnits?:" + unit;
+        String retStr = "Location: (" + x_cor + "," + y_cor + ")" + "\n" + "Terrain: " + getTerrain() + "\nExistingUnits?:"; //unit;
         return retStr;
     }
     
     public String toString () {
-        return TERRAINPIC[this.terrain];
+        return TERRAINPIC[this.terrain] + fighter + "\u001B[0m";
     }
     
     //For testing purposes
     public static void main (String [] args) {
-        Tile a = new Tile(0, 6, 5);
+        Tile a = new Tile(0, 6, 6);
+        Lord b = new Lord();
+        a.setUnit (b);
+        System.out.println (a.fighter.getx_cor());
         System.out.println (a.getX_cor());
         System.out.println (a.getY_cor());
         System.out.println(a.getInfo());
