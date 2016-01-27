@@ -4,6 +4,8 @@ public class William extends Shepherds{
     public William(){
         Weapon[] inventory = new Weapon[3];
         inventory[0] = new BronzeBow();
+        inventory[1] = new NoWeapon();
+        inventory[2] = new NoWeapon();
         name = "William";
         allegiance = "Shepherds";
         symbol = " A ";
@@ -21,6 +23,7 @@ public class William extends Shepherds{
         LUK = 3;
         maxMove = 4;
         drop = 0;
+        arrayholder = 6;
     }
     
     public void levelUp(String message){

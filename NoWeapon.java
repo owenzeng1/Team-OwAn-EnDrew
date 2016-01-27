@@ -1,6 +1,6 @@
 public class NoWeapon extends Weapon{
     public NoWeapon(){
-        name = "-----";
+        name = "Nothing";
         weaponType = "-";
         might = 0;
         crit = 0;

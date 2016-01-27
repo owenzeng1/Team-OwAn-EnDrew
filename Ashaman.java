@@ -4,6 +4,8 @@ public class Ashaman extends Shepherds{
     public Ashaman(){
         Weapon[] inventory = new Weapon[3];
         inventory[0] = new Wind();
+        inventory[1] = new NoWeapon();
+        inventory[2] = new NoWeapon();
         name = "Asha'man";
         allegiance = "Shepherds";
         symbol = " M ";
@@ -21,6 +23,7 @@ public class Ashaman extends Shepherds{
         LUK = 1;
         maxMove = 4;
         drop = 0;
+        arrayholder = 0;
     }
     
     public void levelUp(String message){

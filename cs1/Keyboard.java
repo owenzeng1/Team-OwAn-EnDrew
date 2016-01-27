@@ -251,7 +251,7 @@ public class Keyboard
       } 
       catch (Exception exception) 
       {
-         error ("Error reading int data, MIN_VALUE value returned.");
+         error ("The value you have entered is invalid. This value needs to be an integer.");
          value = Integer.MIN_VALUE;
       }
       return value;

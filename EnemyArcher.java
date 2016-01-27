@@ -3,7 +3,6 @@ public class EnemyArcher extends Hylian{
     //Role: Mage, Weapons: Tomes only
     public EnemyArcher(){
         FireEmblem levelChecker = new FireEmblem();
-        Weapon[] inventory = new Weapon[3];
         inventory[0] = new BronzeBow();
         name = "Enemy Archer";
         allegiance = "Hylians";
@@ -21,6 +20,7 @@ public class EnemyArcher extends Hylian{
         LUK = 2 + (level * 3);
         maxMove = 4;
         drop = 30;
+        arrayholder = 7;
     }
     
     public void levelUp(String message){

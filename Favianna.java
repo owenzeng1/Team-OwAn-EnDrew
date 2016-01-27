@@ -2,8 +2,9 @@ public class Favianna extends Shepherds{
     //Total stats: 49, Growths: 20.25
     //Role: Cavalier, Weapons: Lance only
     public Favianna(){
-        Weapon[] inventory = new Weapon[3];
         inventory[0] = new BronzeLance();
+        inventory[1] = new NoWeapon();
+        inventory[2] = new NoWeapon();
         name = "Favianna";
         allegiance = "Shepherds";
         symbol = " C ";
@@ -21,6 +22,7 @@ public class Favianna extends Shepherds{
         LUK = 4;
         maxMove = 5;
         drop = 0;
+        arrayholder = 5;
     }
     
     public void levelUp(String message){

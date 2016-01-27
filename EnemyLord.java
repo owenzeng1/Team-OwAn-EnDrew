@@ -3,8 +3,7 @@ public class EnemyLord extends Hylian{
     //Role: Lord, Weapons: Sword
     public EnemyLord(){
         FireEmblem levelChecker = new FireEmblem();
-        Weapon[] inventory = new Weapon[3];
-        inventory[0] = new BronzeSword();
+        inventory[0] = new SilverSword();
         name = "Enemy Lord";
         allegiance = "Hylians";
         symbol = " L ";
@@ -21,14 +20,18 @@ public class EnemyLord extends Hylian{
         LUK = 1 + (level * 2);
         maxMove = 4;
         drop = 60;
+        arrayholder = 10;
     }
     
     public void levelUp(String message){
         System.out.println("You shouldn't be seeing this");
         //levelUp will br programmed into the constructor
     }
+    
+    
     public static void main (String [] args) {
         EnemyLord a = new EnemyLord();
         System.out.println (a);
+        System.out.println (a.getWeapon(0).getName());
     }
 }

@@ -215,26 +215,346 @@ public class FireEmblem{
         System.out.println("What do you choose to cover the rest of your unmapped tiles with? \n 1-Plain, 2-Forest, 3-Desert, 4-Moutain, 5-Fort, 6-River");
         int i = Keyboard.readInt();
         if (i == 0) {m.populate(1); System.out.println ("Bad Option. Making all tiles Plains");} //Default
-        else {m.populate(Keyboard.readInt());}
+        else {m.populate(Keyboard.readInt());} 
         System.out.println(m); 
     } 
     
+    //=============================================================================================
+    
+    public int characterSelection (String chac) {
+        if (chac.equals("Ashaman")) {return 0;}
+        else if (chac.equals("Favianna")) {return 5;}
+        else if (chac.equals("Julius")) {return 1;}
+        else if (chac.equals("Lord") ){return 2;}
+        else if (chac.equals("Lucien")) {return 3;}
+        else if (chac.equals("Paige") ){return 4;}
+        else if (chac.equals("William")) {return 6;}
+        else if (chac.equals("EnemyArcher")) {return 7;}
+        else if (chac.equals("EnemyCavalier")) {return 8;}
+        else if (chac.equals("EnemyKnight")) {return 9;}
+        else if (chac.equals("EnemyLord")) {return 10;}
+        else if (chac.equals("EnemyMage")) {return 11;}
+        else if (chac.equals("EnemyMyrmidon")) {return 12;}
+        else {return -1;}
+    }
+    
+    public void move (Board level, int chac) {
+        //if (chac == -1) {System.out.println ("Error"); Move this outside
+        int old_xcor = level.getX_cor(chac);
+        int old_ycor = level.getY_cor(chac);
+        System.out.println (old_xcor);
+        System.out.println (old_ycor);
+        System.out.println("Please indicate the x and y coordinates you wish to move to.");
+        int new_xcor = Keyboard.readInt();
+        int new_ycor = Keyboard.readInt();
+        while (new_xcor < 0|| new_xcor > 18 || new_ycor < 0 || new_ycor > 18){
+            System.out.println("The coordinates you have specified are an invalid option.");
+            new_xcor = Keyboard.readInt();
+            new_ycor = Keyboard.readInt();
+            }
+        while (level.getTile(new_xcor, new_ycor).getHasUnits()){
+            System.out.println("There is already a unit on this tile.");
+            new_xcor = Keyboard.readInt();
+            new_ycor = Keyboard.readInt();
+            }
+        while (Math.abs(new_xcor - old_xcor) + Math.abs(new_ycor - old_ycor) > level.getTile(old_xcor, old_ycor).getFighter().getMaxMove()) 
+            {System.out.println("This is out of your units range.");
+            new_xcor = Keyboard.readInt();
+            new_ycor = Keyboard.readInt();}
+        level.setUnit(new_xcor, new_ycor, level.getTile(old_xcor, old_ycor).getFighter());
+    }
+    
+    public void move (Board level, int chac, int new_x, int new_y) {
+        //if (chac == -1) {System.out.println ("Error"); Move this outside
+        int old_xcor = level.getX_cor(chac);
+        int old_ycor = level.getY_cor(chac);
+        level.setUnit(old_xcor + new_x, old_ycor + new_y, level.getTile(old_xcor, old_ycor).getFighter());
+    }
+
+    
+    public void check(String tileUnitWeapon, Board level){
+        int check_xcor = 19;
+        int check_ycor = 19;
+        while (check_xcor < 0 || check_ycor < 0 || check_xcor > 18 || check_ycor > 18){
+            System.out.println("What is the row you would like to check?");
+            check_xcor = Keyboard.readInt();
+            System.out.println("What is the column you would like to check?");
+            check_ycor = Keyboard.readInt();
+        }
+        if (tileUnitWeapon.equals("T")){
+            System.out.println(level.getBoard()[check_xcor][check_ycor]);
+            readingBreak();
+        }
+        else if (tileUnitWeapon.equals("U")){
+            System.out.println(level.getBoard()[check_xcor][check_ycor].getFighter());
+            readingBreak();
+        }
+        else{
+            System.out.println(level.getBoard()[check_xcor][check_ycor].getFighter().getWeapon(0));
+            readingBreak();
+        }
+    }
+    
+    
+    public void equip(Unit unit) {
+        int inventorySlot = 0;
+        System.out.println("Which weapon would you like to equip?");
+        System.out.println("\nEquipped: " + unit.getWeapon(0).getName() + "\n.1. " + unit.getWeapon(1).getName() + "\n2. " + unit.getWeapon(2).getName());
+        inventorySlot = Keyboard.readInt();
+        while (inventorySlot < -1 || inventorySlot > 2 ||unit.getWeapon(inventorySlot).getName().equals("Nothing")) {
+            System.out.println ("Weapon does not exist");
+            inventorySlot = Keyboard.readInt();
+        }
+        unit.swapWeapon(0, inventorySlot);
+        System.out.println(unit.getWeapon(0).getName());
+    }
+    
+    //==========================================================
+    public void turnHelper(Board level, int playerMove) {
+    if (playerMove == 0){
+    int intendedMove = 0;
+	System.out.println("What would you like " + "Oliver" + " (L) to do?");
+	System.out.println("1. Move\n2. Attack\n3. Equip\n4. Check\n5. Wait");
+	while (intendedMove < 1 || intendedMove > 5){
+	    intendedMove = Keyboard.readInt();
+	}
+	if (intendedMove == 1){
+	    move(level, characterSelection("Lord"));
+	    System.out.println(level);
+	    playerMove += 1; }
+                            
+	if (intendedMove == 2){
+	    attack (level, characterSelection("Lord"));
+	    playerMove += 1;
+	}
+                        
+	if (intendedMove == 3){
+	    int x = level.getX_cor(characterSelection("Lord"));
+	    int y = level.getY_cor(characterSelection("Lord"));
+	    equip(level.getTile(x, y).getFighter());
+	    playerMove += 1;
+	}
+                        
+	if (intendedMove == 4){
+	    String checkInput = Keyboard.readString().toUpperCase();
+	    while (!checkInput.equals("T") && !checkInput.equals("U") && !checkInput.equals("W")){
+		System.out.println("Would you like to examine a (T)ile, (U)nit, or the (W)eapon the unit is carrying?");
+		checkInput = Keyboard.readString().toUpperCase();
+	    }
+	    check(checkInput,level);
+	}
+	if (intendedMove == 5){
+	}
+	if (intendedMove > 5 || intendedMove < 1) {System.out.println("Please Pick a different Option");}
+    }
+    //===================================================================================
+    if (playerMove == 1){
+    int intendedMove = 0;
+	System.out.println("What would you like " + "Faivanna" + " (C) to do?");
+	System.out.println("1. Move\n2. Attack\n3. Equip\n4. Check\n5. Wait");
+	while (intendedMove < 1 || intendedMove > 5){
+	    intendedMove = Keyboard.readInt();
+	}
+	if (intendedMove == 1){
+	    move(level, characterSelection("Favianna"));
+	    System.out.println(level);
+	    playerMove += 1; }
+                            
+	if (intendedMove == 2){
+	    attack (level, characterSelection("Favianna"));
+	    playerMove += 1;
+	}
+                        
+	if (intendedMove == 3){
+	    int x = level.getX_cor(characterSelection("Favianna"));
+	    int y = level.getY_cor(characterSelection("Favianna"));
+	    equip(level.getTile(x, y).getFighter());
+	    playerMove += 1;
+	}
+                        
+	if (intendedMove == 4){
+	    String checkInput = Keyboard.readString().toUpperCase();
+	    while (!checkInput.equals("T") && !checkInput.equals("U") && !checkInput.equals("W")){
+		System.out.println("Would you like to examine a (T)ile, (U)nit, or the (W)eapon the unit is carrying?");
+		checkInput = Keyboard.readString().toUpperCase();
+	    }
+	    check(checkInput,level);
+	}
+	if (intendedMove == 5){
+	}
+	if (intendedMove > 5 || intendedMove < 1) {System.out.println("Please Pick a different Option");}
+    }
+    //======================================================================================
+    if (playerMove == 2){
+    int intendedMove = 0;
+	System.out.println("What would you like " + "Paige" + " (K) to do?");
+	System.out.println("1. Move\n2. Attack\n3. Equip\n4. Check\n5. Wait");
+	while (intendedMove < 1 || intendedMove > 5){
+	    intendedMove = Keyboard.readInt();
+	}
+	if (intendedMove == 1){
+	    move(level, characterSelection("Paige"));
+	    System.out.println(level);
+	    playerMove += 1; }
+                            
+	if (intendedMove == 2){
+	    attack (level, characterSelection("Paige"));
+	    playerMove += 1;
+	}
+                        
+	if (intendedMove == 3){
+	    int x = level.getX_cor(characterSelection("Paige"));
+	    int y = level.getY_cor(characterSelection("Paige"));
+	    equip(level.getTile(x, y).getFighter());
+	    playerMove += 1;
+	}
+                        
+	if (intendedMove == 4){
+	    String checkInput = Keyboard.readString().toUpperCase();
+	    while (!checkInput.equals("T") && !checkInput.equals("U") && !checkInput.equals("W")){
+		System.out.println("Would you like to examine a (T)ile, (U)nit, or the (W)eapon the unit is carrying?");
+		checkInput = Keyboard.readString().toUpperCase();
+	    }
+	    check(checkInput,level);
+	}
+	if (intendedMove == 5){
+	}
+	if (intendedMove > 5 || intendedMove < 1) {System.out.println("Please Pick a different Option");}
+    }
+    //=======================================================================================
+    if (playerMove == 3){
+    int intendedMove = 0;
+	System.out.println("What would you like " + "Lucien" + " (S) to do?");
+	System.out.println("1. Move\n2. Attack\n3. Equip\n4. Check\n5. Wait");
+	while (intendedMove < 1 || intendedMove > 5){
+	    intendedMove = Keyboard.readInt();
+	}
+	if (intendedMove == 1){
+	    move(level, characterSelection("Lucien"));
+	    System.out.println(level);
+	    playerMove += 1; }
+                            
+	if (intendedMove == 2){
+	    attack (level, characterSelection("Lucien"));
+	    playerMove += 1;
+	}
+                        
+	if (intendedMove == 3){
+	    int x = level.getX_cor(characterSelection("Lucien"));
+	    int y = level.getY_cor(characterSelection("Lucien"));
+	    equip(level.getTile(x, y).getFighter());
+	    playerMove += 1;
+	}
+                        
+	if (intendedMove == 4){
+	    String checkInput = Keyboard.readString().toUpperCase();
+	    while (!checkInput.equals("T") && !checkInput.equals("U") && !checkInput.equals("W")){
+		System.out.println("Would you like to examine a (T)ile, (U)nit, or the (W)eapon the unit is carrying?");
+		checkInput = Keyboard.readString().toUpperCase();
+	    }
+	    check(checkInput,level);
+	}
+	if (intendedMove == 5){
+	}
+	if (intendedMove > 5 || intendedMove < 1) {System.out.println("Please Pick a different Option");}
+    }
+        
+}
+    public void enemyturn(Board level, int playerMove) { 
+        if (playerMove == 0) {
+            int random = (int)(Math.random()*4);
+            if (random == 0) {
+                move(level, characterSelection("EnemyLord"), 0, 1); }
+            else if (random == 1) {
+                move(level, characterSelection("EnemyLord"), -1, 0); }
+            else if (random == 2) {
+                move(level, characterSelection("EnemyLord"), 1, 0); }
+            else if (random == 3) {
+                move(level, characterSelection("EnemyLord"), 0, -1); }
+            playerMove += 1; 
+        }
+        if (playerMove == 1) {
+            int random = (int)(Math.random()*4);
+            if (random == 0) {
+                move(level, characterSelection("EnemyCavalier"), 0, 1); }
+            else if (random == 1) {
+                move(level, characterSelection("EnemyCavalier"), -1, 0); }
+            else if (random == 2) {
+                move(level, characterSelection("EnemyCavalier"), 1, 0); }
+            else if (random == 3) {
+                move(level, characterSelection("EnemyCavalier"), 0, -1); }
+            playerMove += 1; 
+        }
+        if (playerMove == 2) {
+            int random = (int)(Math.random()*4);
+            if (random == 0) {
+                move(level, characterSelection("EnemyKnight"), 0, 1); }
+            else if (random == 1) {
+                move(level, characterSelection("EnemyKnight"), -1, 0); }
+            else if (random == 2) {
+                move(level, characterSelection("EnemyKnight"), 1, 0); }
+            else if (random == 3) {
+                move(level, characterSelection("EnemyKnight"), 0, -1); }
+            playerMove += 1; 
+        }
+        if (playerMove == 3) {
+            int random = (int)(Math.random()*4);
+            if (random == 0) {
+                move(level, characterSelection("EnemyMyrmidon"), 0, 1); }
+            else if (random == 1) {
+                move(level, characterSelection("EnemyMyrmidon"), -1, 0); }
+            else if (random == 2) {
+                move(level, characterSelection("EnemyMyrmidon"), 1, 0); }
+            else if (random == 3) {
+                move(level, characterSelection("EnemyMyrmidon"), 0, -1); }
+            playerMove += 1; 
+        }
+    }
+    
+    public void attack(Board level, int chac) {
+        Unit temp = new BlankUnit();
+        int old_xcor = level.getX_cor(chac);
+        int old_ycor = level.getY_cor(chac);
+        System.out.println (old_xcor);
+        System.out.println (old_ycor);
+        System.out.println("Please indicate the x and y coordinates of the unit you want to attack");
+        int new_xcor = Keyboard.readInt();
+        int new_ycor = Keyboard.readInt();
+        while (new_xcor < 0|| new_xcor > 18 || new_ycor < 0 || new_ycor > 18){
+            System.out.println("The coordinates you have specified are an invalid option.");
+            new_xcor = Keyboard.readInt();
+            new_ycor = Keyboard.readInt();
+            }
+        while (level.getTile(new_xcor, new_ycor).getHasUnits() == false) {
+            System.out.println("No unit exist");
+            return;
+        }
+        while (Math.abs(new_xcor - old_xcor) + Math.abs(new_ycor - old_ycor) > level.getTile(old_xcor, old_ycor).getFighter().getMaxMove()) 
+            {System.out.println("This is out of your units range.");
+            new_xcor = Keyboard.readInt();
+            new_ycor = Keyboard.readInt();}
+        System.out.println(level.getTile(old_xcor, old_ycor).getFighter().getInfo());
+        System.out.println(level.getTile(new_xcor, new_ycor).getFighter().getInfo());
+        level.getTile(old_xcor, old_ycor).getFighter().attack(level.getTile(new_xcor, new_ycor).getFighter(), false);
+        System.out.println(level.getTile(old_xcor, old_ycor).getFighter().getInfo());
+        System.out.println(level.getTile(new_xcor, new_ycor).getFighter().getInfo());
+        if (level.getTile(new_xcor, new_ycor).getFighter().getHP() <= 0) 
+            {level.getTile(new_xcor, new_ycor).setBlank();
+            System.out.println("Enemy is dead");} 
+        if (level.getTile(old_xcor, old_ycor).getFighter().getHP() <= 0)
+            {level.getTile(old_xcor, old_ycor).setBlank();
+            System.out.println("You are dead");} 
+    }
+    
+    //==============================================================================================================
     public void play(){
         int playerMove = 0;
         int intendedMove = 0;
-        int move_xcor = -1;
-        int move_ycor = -1;
-        int old_xcor = -1;
-        int old_ycor = -1;
         int attack_xcor = -1;
         int attack_ycor = -1;
-        String checkObject = "";
-        int check_xcor = -1;
-        int check_ycor = -1;
         String lordsName = "Oliver";
         String progress = "";
         boolean enemiesAlive = true;
-        boolean defenderCounter = false;
         Unit defender = new BlankUnit();
         Unit lord = new Lord();
         Unit cavalier = new Favianna();
@@ -251,7 +571,8 @@ public class FireEmblem{
         Unit enemyMage = new EnemyMage();
         Unit enemyArcher = new EnemyArcher();
         Unit enemyMyrmidon = new EnemyMyrmidon();
-        while (level < 1){//was originally 4 but we had to cut it short.
+        while (level < 4){
+            
             //==========================LEVEL 1=========================================//
             if (level == 0){
                 System.out.println("F(C): Greetings, I am called Favianna (C) of the Royal Sheperds.");
@@ -275,6 +596,7 @@ public class FireEmblem{
                 }
                 lord.setName(lordsName);
                 //System.out.println(lord);
+                readingBreak();
                 System.out.println("\n/========ONE WEEK LATER========/");
                 System.out.println("P(K): Paige (K) reporting in, Lord " + lordsName + ".");
                 System.out.println("P(K): Sire, there have been reports of a band of theives residing in the mountains.");
@@ -290,121 +612,29 @@ public class FireEmblem{
                 }
                 progress = "";
                 Board levelOne = a;
-                lord.setx_cor(16);
-                lord.sety_cor(2);
                 levelOne.setUnit(16, 2, lord);
-                knight.setx_cor(17);
-                knight.sety_cor(2); 
                 levelOne.setUnit(17, 2, knight);
-                cavalier.setx_cor(16);
-                cavalier.sety_cor(1);
                 levelOne.setUnit(16, 1, cavalier);
-                myrmidon.setx_cor(18);
-                myrmidon.sety_cor(2);
                 levelOne.setUnit(18, 2, myrmidon);
-                enemyCavalier.setx_cor(6);
-                enemyCavalier.sety_cor(11);
                 levelOne.setUnit(6 , 11, enemyCavalier);
-                levelOne.setUnit(6, 12, enemyMyrmidon);
+                levelOne.setUnit(16, 3, enemyMyrmidon);
                 levelOne.setUnit(6, 13, enemyKnight);
                 levelOne.setUnit(7, 12,enemyLord);
                 System.out.println(levelOne);
                 System.out.println("Asha'man (M), Julius (H), and William (A) are on a 2-week mission.");
                 System.out.println("They are exploring the Thick Woods and will be back 3 days later.");
-                while (lord.isAlive() && enemiesAlive){
-                    enemiesAlive = enemyLord.isAlive() || enemyMyrmidon.isAlive() || enemyKnight.isAlive() || enemyCavalier.isAlive();
+                while (lord.isAlive() && enemiesAlive) {
                     while (playerMove < 4){
-                        if (playerMove == 0){
-                            System.out.println("What would you like " + lordsName + " (L) to do?");
-                            System.out.println("1. Move\n2. Attack\n3. Equip\n4. Check\n5. Wait");
-                            while (intendedMove < 1 || intendedMove > 5){
-                                intendedMove = Keyboard.readInt();
-                            }
-                            if (intendedMove == 1){
-                                while (move_xcor < 0 || move_xcor > 18 || move_ycor < 0 || move_ycor > 18){
-                                    System.out.println("State the row you wish " + lordsName + " to move to");
-                                    move_xcor = Keyboard.readInt();
-                                    System.out.println("State the column you wish " + lordsName + " to move to");
-                                    move_ycor = Keyboard.readInt();
-                                    if (levelOne.getBoard()[move_xcor][move_ycor].getHasUnits()){
-                                        System.out.println("This space already has a unit");
-                                        move_xcor = -1;
-                                        move_ycor = -1;
-                                    }
-                                    if (Math.abs(lord.getx_cor() - move_xcor) + Math.abs(lord.gety_cor() - move_ycor) > lord.getMaxMove()){
-                                        System.out.println("This is out of your units range.");
-                                        move_xcor = -1;
-                                        move_ycor = -1;
-                                    }
-                                }
-                            }
-                        }
-                                //===========================Move=======================
-                                //System.out.println("Type the x ad y of your unit location");
-                                //old_xcor = Keyboard.readInt();
-                                //old ycor = Keyboard.readInt();
-                                //if 
-                                old_xcor = lord.getx_cor();
-                                old_ycor = lord.gety_cor();
-                                levelOne.setUnit(move_xcor,move_ycor,lord);
-                                lord.setx_cor(move_xcor);
-                                lord.sety_cor(move_ycor);
-                                levelOne.setUnit(old_xcor, old_ycor, blank);
-                                System.out.println(levelOne);
-                                readingBreak();
-                            }
-                            playerMove += 1;
-                        }
-                        if (intendedMove == 2){
-                            while (attack_xcor < 0 || attack_ycor < 0 || attack_xcor > 18 || attack_ycor > 18){
-                                System.out.println("What is the row you would like to attack?");
-                                attack_xcor = Keyboard.readInt();
-                                System.out.println("What is the column you would like to attack?");
-                                attack_ycor = Keyboard.readInt();
-                                if (levelOne.getBoard()[attack_xcor][attack_ycor].getFighter().getName().equals("Blank")){
-                                    System.out.println("There is nobody there to attack.");
-                                    attack_xcor = -1;
-                                    attack_ycor = -1;
-                                }
-                                if(Math.abs(attack_xcor - lord.getx_cor()) + Math.abs(attack_ycor - lord.gety_cor()) > lord.getEquip().getRange()){
-                                    System.out.println("That space is out of your weapon range");
-                                    attack_xcor = -1;
-                                    attack_ycor = -1;
-                                }
-                            }
-                            defenderCounter = Math.abs(lord.getx_cor() - levelOne.getBoard()[attack_xcor][attack_ycor].getFighter().getx_cor()) + Math.abs(lord.gety_cor() - levelOne.getBoard()[attack_xcor][attack_ycor].getFighter().gety_cor()) > levelOne.getBoard()[attack_xcor][attack_ycor].getFighter().getEquip().getRange();
-                            lord.attack(lord,levelOne.getBoard()[attack_xcor][attack_ycor].getFighter(), defenderCounter);
-                            playerMove += 1;
-                        }
-                        
-                        if (intendedMove == 3){
-                            
-                        }
-                        
-                        if (intendedMove == 4){
-                            System.out.println("Would you like to check a (T)ile or a (U)nit?");
-                            while (!checkObject.equalsIgnoreCase("T") && !checkObject.equalsIgnoreCase("U")){
-                                checkObject = Keyboard.readString();
-                            }
-                            while (check_xcor < 0 || check_ycor < 0 || check_xcor > 18 || check_ycor > 18){
-                                System.out.println("What is the row you would like to check?");
-                                check_xcor = Keyboard.readInt();
-                                System.out.println("What is the column you would ike to check?");
-                                check_ycor = Keyboard.readInt();
-                            }
-                            if (checkObject.equalsIgnoreCase("T")){
-                                System.out.println(levelOne.getBoard()[check_xcor][check_ycor]);
-                                readingBreak();
-                            }
-                            else{
-                                System.out.println(levelOne.getBoard()[check_xcor][check_ycor].getFighter());
-                            }
-                        }
-                        if (intendedMove == 5){
-                            playerMove += 1;
-                        }
-                    }
+                        turnHelper(levelOne, playerMove);
+                        enemyturn(levelOne, playerMove);
+                        System.out.println(levelOne);
+                        //System.out.println(playerMove);
                 }
+                enemiesAlive = enemyLord.isAlive() || enemyMyrmidon.isAlive() || enemyKnight.isAlive() || enemyCavalier.isAlive();
+                playerMove = 0;
+                }
+                //level += 1;
+            }
             
             
             //==========================LEVEL 2=========================================//
@@ -433,6 +663,7 @@ public class FireEmblem{
                         progress = Keyboard.readString();
                     }
                 }
+            }
                 progress = "";
                 System.out.println("\nJ(H): William and I will restock on our weapons from the barracks.");
                 System.out.println("F(C): I'll ride on ahead to scout out the situation.");
@@ -455,8 +686,6 @@ public class FireEmblem{
                     
                 }
                 */
-            }
-            
             
             //==================================LEVEL 3=============================//
             if (level == 2){
@@ -528,6 +757,8 @@ public class FireEmblem{
             }
             level += 1;
         }
+    }
+        
     
 
     
@@ -600,9 +831,38 @@ public class FireEmblem{
     
     
     public static void main(String[] args){ //Tester
+    
         int noStops = 0;
         FireEmblem game = new FireEmblem();
-        /*System.out.println(game.e);
+       /* Board levelOne = game.a;
+        Unit defender = new BlankUnit();
+        Unit lord = new Lord();
+        Unit cavalier = new Favianna();
+        Unit knight = new Paige();
+        Unit mage = new Ashaman();
+        Unit archer = new William();
+        Unit healer = new Julius();
+        Unit myrmidon = new Lucien();
+        Unit blank = new BlankUnit();
+        
+        Unit enemyLord = new EnemyLord();
+        Unit enemyCavalier = new EnemyCavalier();
+        Unit enemyKnight = new EnemyKnight();
+        Unit enemyMage = new EnemyMage();
+        Unit enemyArcher = new EnemyArcher();
+        Unit enemyMyrmidon = new EnemyMyrmidon();
+                levelOne.setUnit(16, 2, lord);
+                levelOne.setUnit(17, 2, knight);
+                levelOne.setUnit(16, 1, cavalier);
+                levelOne.setUnit(18, 2, myrmidon);
+                levelOne.setUnit(6 , 11, enemyCavalier);
+                levelOne.setUnit(6, 12, enemyMyrmidon);
+                levelOne.setUnit(6, 13, enemyKnight);
+                levelOne.setUnit(7, 12,enemyLord);
+        System.out.println (levelOne);
+        game.move(levelOne, game.characterSelection("Lord"));
+        System.out.println (levelOne);
+        System.out.println(game.e);
         System.out.println(game.a);
         System.out.println(game.f);
         System.out.println(game.g);
@@ -658,7 +918,7 @@ public class FireEmblem{
                 System.out.println("Directors: Andrew Lin and Owen Zeng");
                 System.out.println("Scriptwriter: Owen Zeng");
                 System.out.println("Map Design: Andrew Lin");
-                System.out.println("Character Design: Owen Zeng");
+                System.out.println("Character Design: Owen Zeng and Andrew Lin");
                 System.out.println("Beta testers: Andrew Lin and Owen Zeng");
                 game.readingBreak();
                 System.out.println("\n\n\n\n");

@@ -17,8 +17,13 @@ public abstract class Hylian extends Unit { //Enemy Unit
     public int LUK;
     public int maxMove;
     public int drop;
+    protected int arrayholder;
     
     abstract void levelUp(String message);
+    
+    public int getArrayHolder() {
+        return arrayholder;
+    } 
     
     public boolean isAlive(){
         return this.HP > 0;
@@ -26,8 +31,8 @@ public abstract class Hylian extends Unit { //Enemy Unit
     public boolean isLevelUp(){
         return experience >= 100;
     }
-    public Weapon getEquip(){
-        return this.inventory[0];
+    public Weapon getWeapon(int slot){
+        return this.inventory[slot];
     }
     public void expGain(int reward){
         this.experience += reward;
@@ -51,8 +56,8 @@ public abstract class Hylian extends Unit { //Enemy Unit
     }
     public void attack(Unit attacker, Unit defender, boolean outOfRange){
         //setting up a lot of variables that will be used
-        double atkAccuracy = attacker.getEquip().getHit() + (attacker.getSKL() * 1.5) + (attacker.getLUK() * .5);
-        double defAccuracy = defender.getEquip().getHit() + (defender.getSKL() * 1.5) + (defender.getLUK() * .5);
+        double atkAccuracy = attacker.getWeapon(0).getHit() + (attacker.getSKL() * 1.5) + (attacker.getLUK() * .5);
+        double defAccuracy = defender.getWeapon(0).getHit() + (defender.getSKL() * 1.5) + (defender.getLUK() * .5);
         double atkAvoid = (attacker.getSPD() * 1.5) + (attacker.getLUK() * .5);
         double defAvoid = (defender.getSPD() * 1.5) + (defender.getLUK() * .5);
         int atkHit = (int) (atkAccuracy - defAvoid);
@@ -71,42 +76,42 @@ public abstract class Hylian extends Unit { //Enemy Unit
         int defDamage = defender.inventory[0].getMight() + getDamage(defender, attacker);
         
         //implementing weapon triangle
-        if (attacker.getEquip().getType().equals("S")){
-            if (defender.getEquip().getType().equals("A") || defender.getEquip().getType().equals("SA")){
+        if (attacker.getWeapon(0).getType().equals("S")){
+            if (defender.getWeapon(0).getType().equals("A") || defender.getWeapon(0).getType().equals("SA")){
                 atkHit += 10;
                 atkDamage += 1;
                 defHit -= 10;
                 defDamage -= 1;
             }
-            else if (defender.getEquip().getType().equals("L")){
+            else if (defender.getWeapon(0).getType().equals("L")){
                 atkHit -= 10;
                 atkDamage -= 1;
                 defHit += 10;
                 defDamage += 1;
             }
         }
-        else if (attacker.getEquip().getType().equals("A") || attacker.getEquip().getType().equals("SA")){
-            if (defender.getEquip().getType().equals("L")){
+        else if (attacker.getWeapon(0).getType().equals("A") || attacker.getWeapon(0).getType().equals("SA")){
+            if (defender.getWeapon(0).getType().equals("L")){
                 atkHit += 10;
                 atkDamage += 1;
                 defHit -= 10;
                 defDamage -= 1;
             }
-            else if (defender.getEquip().getType().equals("S")){
+            else if (defender.getWeapon(0).getType().equals("S")){
                 atkHit -= 10;
                 atkDamage -= 1;
                 defHit += 10;
                 defDamage += 1;
             }
         }
-        else if (attacker.getEquip().getType().equals("L")){
-            if (defender.getEquip().getType().equals("S")){
+        else if (attacker.getWeapon(0).getType().equals("L")){
+            if (defender.getWeapon(0).getType().equals("S")){
                 atkHit += 10;
                 atkDamage += 1;
                 defHit -= 10;
                 defDamage -= 1;
             }
-            else if (defender.getEquip().getType().equals("A")){
+            else if (defender.getWeapon(0).getType().equals("A")){
                 atkHit -= 10;
                 atkDamage -= 1;
                 defHit += 10;

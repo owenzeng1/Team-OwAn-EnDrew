@@ -4,6 +4,8 @@ public class BlankUnit extends Unit{
     public BlankUnit(){
         Weapon[] inventory = new Weapon[3];
         inventory[0] = new NoWeapon();
+        inventory[1] = new NoWeapon();
+        inventory[2] = new NoWeapon();
         name = "Blank";
         allegiance = "Nothing";
         symbol = "   ";
@@ -21,6 +23,7 @@ public class BlankUnit extends Unit{
         LUK = 0;
         maxMove = 0;
         drop = 0;
+        arrayholder = -1;
     }
     
     

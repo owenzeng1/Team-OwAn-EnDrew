@@ -6,6 +6,8 @@ In process of turning this into a map editing software**
 
 public class Board {
     private final static int BOARD_SIZE = 20;
+    private final int[] X_cor = new int[13];
+    private final int[] Y_cor = new int[13];
 
     private Tile[][] board;
     private String name;
@@ -52,7 +54,6 @@ public class Board {
 	    return board.length;
     }//O (1);
 
-
     //return the item at the specified row & column   
     private void get( int r, int c ) {
     	System.out.println (board[r][c]);
@@ -63,6 +64,14 @@ public class Board {
     private boolean isEmpty( int r, int c ) {
 	    return board[r][c] == null;
     }//O (1)
+    
+    public int getX_cor(int x) {
+        return X_cor[x];
+    }
+    
+    public int getY_cor(int y) {
+        return Y_cor[y];
+    }
 
     public String toString() {
         String bar = "";
@@ -169,9 +178,29 @@ public class Board {
         this.name = name;
     }
     
-    public void setUnit(int x, int y, Unit unit){
-        board[x][y].setUnit(unit);
-    } 
+    /*public void setUnit(int old_x, int old_y, int new_x, int new_y){ //Doesn't work. Cannot set ArrayHolder because ArrayHolder is ) in Unit;
+        Unit old = board[old_x][old_y].getFighter();
+        Unit temp = board[new_x][new_y].getFighter();
+        board[new_x][new_y].setUnit(old);
+        board[old_x][old_y].setUnit(temp);
+        X_cor[board[old_x][old_y].getFighter().getArrayHolder()] = new_x;
+        System.out.println (X_cor[getTile(new_x, new_y).getFighter().getArrayHolder()]);
+        Y_cor[board[old_x][old_y].getFighter().getArrayHolder()] = new_y;
+        System.out.println("Done");
+    } */
+    
+    public Tile getTile(int a, int b) {
+        return board[a][b];
+    }
+    
+    public void setUnit(int new_x, int new_y, Unit unit) {
+        getTile(unit.x_cor, unit.y_cor).setUnit(getTile(new_x, new_y).getFighter());
+        getTile(new_x,new_y).setUnit(unit);
+        X_cor[getTile(new_x, new_y).getFighter().getArrayHolder()] = new_x;
+        //System.out.println (X_cor[getTile(new_x, new_y).getFighter().getArrayHolder()]);
+        Y_cor[getTile(new_x, new_y).getFighter().getArrayHolder()] = new_y;
+        //System.out.println (Y_cor[getTile(new_x, new_y).getFighter().getArrayHolder()]);
+    }
     
     
     //main method for testing
@@ -180,11 +209,16 @@ public class Board {
     System.out.println (level.getName());
     boolean done = false;
     Lord a = new Lord();
-    //level.setUnit(0, 0, a);
+    level.setUnit(2, 1, a);
+    //System.out.println(level.getTile(0,0).getHasUnits());
+    //System.out.println(level.getTile(0, 0).getFighter().getMaxMove());
+    //System.out.println(level);
+    System.out.println(level.getX_cor(2));
+    System.out.println(level.getY_cor(2));
     System.out.println(level);
     //System.out.println(level.board[0][0].getFighter().getx_cor());
     //System.out.println(level.board[0][0].getFighter().gety_cor());
-    while (!done) {
+    /*while (!done) {
         System.out.println ("Please select the map terrain? \n 1-Plain, 2-Forest, 3-Desert, 4-Moutain, 5-Fort, 6-Rivers");
         int t = Keyboard.readInt();
         System.out.println ("Please select an coordinate (x, y)");
@@ -204,6 +238,7 @@ public class Board {
     System.out.println("What do you choose to cover the rest of your unmapped Tiles with? \n 1-Plain, 2-Forest, 3-Desert, 4-Moutain, 5-Fort, 6-River");
     level.populate(Keyboard.readInt());
     System.out.println(level); 
-    } 
+    }*/ 
+    }
     
 }//end class Board

@@ -2,8 +2,9 @@ public class Paige extends Shepherds{
     //Total stats: 52, Growths: 19.5
     //Role: Knight, Weapons: Axes only
     public Paige(){
-        Weapon[] inventory = new Weapon[3];
         inventory[0] = new BronzeAxe();
+        inventory[1] = new NoWeapon();
+        inventory[2] = new NoWeapon();
         name = "Paige";
         allegiance = "Shepherds";
         symbol = " K ";
@@ -21,6 +22,7 @@ public class Paige extends Shepherds{
         LUK = 7;
         maxMove = 3;
         drop = 0;
+        arrayholder = 4;
     }
     
     public void levelUp(String message){

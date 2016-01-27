@@ -3,7 +3,6 @@ public class EnemyMyrmidon extends Hylian{
     //Role: Myrmidon, Weapons: Sword only
     public EnemyMyrmidon(){
         FireEmblem levelChecker = new FireEmblem();
-        Weapon[] inventory = new Weapon[3];
         inventory[0] = new BronzeSword();
         name = "Enemy Myrmidon";
         allegiance = "Hylians";
@@ -21,6 +20,7 @@ public class EnemyMyrmidon extends Hylian{
         LUK = 4 + (level * 3);
         maxMove = 4;
         drop = 40;
+        arrayholder = 12;
     }
     
     public void levelUp(String message){

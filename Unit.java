@@ -1,4 +1,4 @@
-abstract public class Unit{
+public abstract class Unit{
     Weapon[] inventory = new Weapon[3];
     public String name;
     public String allegiance;
@@ -19,6 +19,7 @@ abstract public class Unit{
     public int drop;
     public int x_cor = 0;
     public int y_cor = 0;
+    public int arrayholder;
     
     //Basic functions that each Unit should have;
     
@@ -26,21 +27,14 @@ abstract public class Unit{
         return color + symbol;
     }
     
-    public int getx_cor(){
-        return x_cor;
-    }
-    
-    public int gety_cor(){
-        return y_cor;
-    }
-    
-    public void setx_cor(int a){
+    public void setxy(int a, int b){
         x_cor = a;
+        y_cor = b;
     }
     
-    public void sety_cor(int a){
-         y_cor = a;
-    }
+    public int getArrayHolder() {
+        return arrayholder;
+    } 
     
     public boolean isAlive(){
         return this.HP > 0;
@@ -48,18 +42,18 @@ abstract public class Unit{
     public boolean isLevelUp(){
         return experience >= 100;
     }
-    public Weapon getEquip(){
-        return this.inventory[0];
+    public Weapon getWeapon(int slot){
+        return this.inventory[slot];
     }
     public void expGain(int reward){
         this.experience += reward;
     }
-    public int getDamage(Unit offense, Unit defense){
-        if(offense.inventory[0].getType().equals("T")){
-            return offense.getMAG() - defense.getRES();
+    public int getDamage(Unit defense){
+        if(getWeapon(0).getType().equals("T")){
+            return getMAG() - defense.getRES();
         }
         else{
-            return offense.getATK() - defense.getDEF();
+            return getATK() - getDEF();
         }
     }
     public void swapWeapon(int first, int second){
@@ -71,17 +65,17 @@ abstract public class Unit{
             }
         }
     }
-    public void attack(Unit attacker, Unit defender, boolean outOfRange){
+    public void attack(Unit defender, boolean outOfRange){
         //setting up a lot of variables that will be used
-        double atkAccuracy = attacker.getEquip().getHit() + (attacker.getSKL() * 1.5) + (attacker.getLUK() * .5);
-        double defAccuracy = defender.getEquip().getHit() + (defender.getSKL() * 1.5) + (defender.getLUK() * .5);
-        double atkAvoid = (attacker.getSPD() * 1.5) + (attacker.getLUK() * .5);
+        double atkAccuracy = getWeapon(0).getHit() + (getSKL() * 1.5) + (getLUK() * .5);
+        double defAccuracy = defender.getWeapon(0).getHit() + (defender.getSKL() * 1.5) + (defender.getLUK() * .5);
+        double atkAvoid = (getSPD() * 1.5) + (getLUK() * .5);
         double defAvoid = (defender.getSPD() * 1.5) + (defender.getLUK() * .5);
         int atkHit = (int) (atkAccuracy - defAvoid);
         int defHit = (int) (defAccuracy - atkAvoid);
-        double atkCrit = attacker.inventory[0].getCrit() + attacker.getSKL() / 2;
-        double defCrit = defender.inventory[0].getCrit() + defender.getSKL() / 2;
-        double atkAntiCrit = attacker.getLUK();
+        double atkCrit = getWeapon(0).getCrit() + getSKL() / 2;
+        double defCrit = defender.getWeapon(0).getCrit() + defender.getSKL() / 2;
+        double atkAntiCrit = getLUK();
         double defAntiCrit = defender.getLUK();
         int atkCritical = (int) (atkCrit - defAntiCrit);
         int defCritical = (int) (defCrit - atkAntiCrit);
@@ -89,46 +83,46 @@ abstract public class Unit{
         boolean stopSecondDef = false;
         
         //finding the damage
-        int atkDamage = attacker.inventory[0].getMight() + getDamage(attacker, defender);
-        int defDamage = defender.inventory[0].getMight() + getDamage(defender, attacker);
+        int atkDamage = getWeapon(0).getMight() + getDamage(defender);
+        int defDamage = defender.getWeapon(0).getMight() + getDamage(defender);
         
         //implementing weapon triangle
-        if (attacker.getEquip().getType().equals("S")){
-            if (defender.getEquip().getType().equals("A") || defender.getEquip().getType().equals("SA")){
+        if (getWeapon(0).getType().equals("S")){
+            if (defender.getWeapon(0).getType().equals("A") || defender.getWeapon(0).getType().equals("SA")){
                 atkHit += 10;
                 atkDamage += 1;
                 defHit -= 10;
                 defDamage -= 1;
             }
-            else if (defender.getEquip().getType().equals("L")){
+            else if (defender.getWeapon(0).getType().equals("L")){
                 atkHit -= 10;
                 atkDamage -= 1;
                 defHit += 10;
                 defDamage += 1;
             }
         }
-        else if (attacker.getEquip().getType().equals("A") || attacker.getEquip().getType().equals("SA")){
-            if (defender.getEquip().getType().equals("L")){
+        else if (getWeapon(0).getType().equals("A") || getWeapon(0).getType().equals("SA")){
+            if (defender.getWeapon(0).getType().equals("L")){
                 atkHit += 10;
                 atkDamage += 1;
                 defHit -= 10;
                 defDamage -= 1;
             }
-            else if (defender.getEquip().getType().equals("S")){
+            else if (defender.getWeapon(0).getType().equals("S")){
                 atkHit -= 10;
                 atkDamage -= 1;
                 defHit += 10;
                 defDamage += 1;
             }
         }
-        else if (attacker.getEquip().getType().equals("L")){
-            if (defender.getEquip().getType().equals("S")){
+        else if (getWeapon(0).getType().equals("L")){
+            if (defender.getWeapon(0).getType().equals("S")){
                 atkHit += 10;
                 atkDamage += 1;
                 defHit -= 10;
                 defDamage -= 1;
             }
-            else if (defender.getEquip().getType().equals("A")){
+            else if (defender.getWeapon(0).getType().equals("A")){
                 atkHit -= 10;
                 atkDamage -= 1;
                 defHit += 10;
@@ -160,30 +154,30 @@ abstract public class Unit{
         if (atkHitRoll < atkHit){
             if (atkCritRoll < atkCritical){
                 defender.setHP(defender.getHP() - (3 * atkDamage));
-                if (attacker.inventory[0].getType().equals("ST")){
-                    attacker.setHP(attacker.getHP() + (3 * atkDamage) / 2);
+                if (getWeapon(0).getType().equals("ST")){
+                    setHP(getHP() + (3 * atkDamage) / 2);
                 }
             }
             else{
                 defender.setHP(defender.getHP() - atkDamage);
-                if (attacker.inventory[0].getType().equals("ST")){
-                    attacker.setHP(attacker.getHP() + (atkDamage / 2));
+                if (getWeapon(0).getType().equals("ST")){
+                    setHP(getHP() + (atkDamage / 2));
                 }
             }
-            attacker.inventory[0].setDur(inventory[0].getDur() - 1);
-            stopSecondAtk = attacker.inventory[0].isBroken();
+            getWeapon(0).setDur(getWeapon(0).getDur() - 1);
+            stopSecondAtk = getWeapon(0).isBroken();
             //System.out.println("Successful first attack");
             //check is defender is dead
-            if (attacker.getHP() > attacker.getMaxHP()){
-                attacker.setHP(attacker.getMaxHP());
+            if (getHP() > getMaxHP()){
+                setHP(getMaxHP());
             }
-            if (defender.getHP() > attacker.getMaxHP()){
+            if (defender.getHP() > getMaxHP()){
                 defender.setHP(defender.getMaxHP());
             }
             if (!defender.isAlive()){
-                attacker.expGain(defender.getDrop());
-                if(attacker.isLevelUp()){
-                    attacker.levelUp("LEVEL UP!");
+                expGain(defender.getDrop());
+                if(isLevelUp()){
+                    levelUp("LEVEL UP!");
                 }
                 return;
             }
@@ -193,23 +187,23 @@ abstract public class Unit{
         if (!outOfRange){
             if (defHitRoll < defHit){
                 if (defCritRoll < defCritical){
-                    attacker.setHP(attacker.getHP() - (3 *defDamage));
+                    setHP(getHP() - (3 *defDamage));
                 }
                 else{
-                    attacker.setHP(attacker.getHP() - defDamage);
+                    setHP(getHP() - defDamage);
                 }
-                defender.inventory[0].setDur(inventory[0].getDur() - 1);
-                stopSecondDef = defender.inventory[0].isBroken();
+                defender.getWeapon(0).setDur(getWeapon(0).getDur() - 1);
+                stopSecondDef = defender.getWeapon(0).isBroken();
                 //System.out.println("Successful defensive strike");
                 //check if attacker is dead
-                if (attacker.getHP() > attacker.getMaxHP()){
-                attacker.setHP(attacker.getMaxHP());
+                if (getHP() > getMaxHP()){
+                setHP(getMaxHP());
                 }
-                if (defender.getHP() > attacker.getMaxHP()){
+                if (defender.getHP() > getMaxHP()){
                     defender.setHP(defender.getMaxHP());
                 }
-                if (!attacker.isAlive()){
-                    defender.expGain(attacker.getDrop());
+                if (!isAlive()){
+                    defender.expGain(getDrop());
                     if(defender.isLevelUp()){
                         defender.levelUp("LEVEL UP!");
                     }
@@ -220,18 +214,18 @@ abstract public class Unit{
         
         //====================================offensive possible second strike==============================//
         if(!stopSecondAtk){
-            if (attacker.getSPD() - 5 > defender.getSPD()){
+            if (getSPD() - 5 > defender.getSPD()){
                 if (secondAtkHitRoll < atkHit){
                     if (secondAtkCritRoll < atkCritical){
                         defender.setHP(defender.getHP() - (3 * atkDamage));
-                        if (attacker.inventory[0].getType().equals("ST")){
-                            attacker.setHP(attacker.getHP() + (3 * atkDamage) / 2);
+                        if (getWeapon(0).getType().equals("ST")){
+                            setHP(getHP() + (3 * atkDamage) / 2);
                         }
                     }
                     else{
                         defender.setHP(defender.getHP() - atkDamage);
-                         if (attacker.inventory[0].getType().equals("ST")){
-                            attacker.setHP(attacker.getHP() + (atkDamage / 2));
+                         if (getWeapon(0).getType().equals("ST")){
+                            setHP(getHP() + (atkDamage / 2));
                         }
                     }
                     //System.out.println("Successful double");
@@ -239,23 +233,23 @@ abstract public class Unit{
             }
         }
         else{
-            attacker.swapWeapon(0,1);
-            attacker.swapWeapon(1,2);
+            swapWeapon(0,1);
+            swapWeapon(1,2);
             Weapon nothing = new NoWeapon();
-            attacker.setWeapon(2,nothing);
+            setWeapon(2,nothing);
         }
         
         //check if defender is dead
-        if (attacker.getHP() > attacker.getMaxHP()){
-            attacker.setHP(attacker.getMaxHP());
+        if (getHP() > getMaxHP()){
+            setHP(getMaxHP());
         }
-        if (defender.getHP() > attacker.getMaxHP()){
+        if (defender.getHP() > getMaxHP()){
             defender.setHP(defender.getMaxHP());
         }
         if (!defender.isAlive()){
-            attacker.expGain(defender.getDrop());
-            if(attacker.isLevelUp()){
-                attacker.levelUp("LEVEL UP!");
+            expGain(defender.getDrop());
+            if(isLevelUp()){
+                levelUp("LEVEL UP!");
             }
             return;
         }
@@ -263,12 +257,12 @@ abstract public class Unit{
         //========================defensive possible second strike==========================//
         if (!outOfRange){
             if (!stopSecondDef){
-                if (defender.getSPD() - 5 > attacker.getSPD()){
+                if (defender.getSPD() - 5 > getSPD()){
                     if (secondDefHitRoll < defHit){
                         if (secondDefCritRoll < defCritical){
                             defDamage *= 3;
                         }
-                        attacker.setHP(attacker.getHP() - defDamage);
+                        setHP(getHP() - defDamage);
                     }
                 }
             }
@@ -280,14 +274,14 @@ abstract public class Unit{
             }
         
             //check if attacker is dead
-            if (attacker.getHP() > attacker.getMaxHP()){
-                attacker.setHP(attacker.getMaxHP());
+            if (getHP() > getMaxHP()){
+                setHP(getMaxHP());
             }
-            if (defender.getHP() > attacker.getMaxHP()){
+            if (defender.getHP() > getMaxHP()){
                 defender.setHP(defender.getMaxHP());
             }
-            if (!attacker.isAlive()){
-                defender.expGain(attacker.getDrop());
+            if (!isAlive()){
+                defender.expGain(getDrop());
                 if(defender.isLevelUp()){
                     defender.levelUp("LEVEL UP!");
                 }
@@ -341,6 +335,16 @@ abstract public class Unit{
     public int getDrop(){
         return this.drop;
     }
+    public int get_xcor(){
+        return x_cor;
+    }
+    
+    public int get_ycor(){
+        return y_cor;
+    }
+    public String getAllegiane(){
+        return this.allegiance;
+    }
     
     
     //Mutators
@@ -388,20 +392,42 @@ abstract public class Unit{
     
     abstract void levelUp(String message);
     
+     public String getInfo(){
+        String retStr = "Unit: " + name + "\n";
+        retStr += "Allegiance: " + allegiance + "\n";
+        retStr += "Level: " + level + "\n";
+        retStr += "EXP: " + experience + "\n";
+        retStr += "Item: " + inventory[0].getName() + "\n";
+        retStr += "HP: " + HP + "\n";
+        retStr += "ATK: " + ATK + "\n";
+        retStr += "DEF: " + DEF + "\n";
+        retStr += "MAG: " + MAG + "\n";
+        retStr += "RES: " + RES + "\n";
+        retStr += "SKL: " + SKL + "\n";
+        retStr += "SPD: " + SPD + "\n";
+        retStr += "LUK: " + LUK + "\n";
+        retStr += "Movement: " + maxMove + "\n";
+        return retStr;
+    } 
+    
     public static void main(String[] args){
-        Unit mainChar = new Lord();
-        Unit enemy = new EnemyLord();
-        System.out.println(mainChar);
-        System.out.println(enemy);
+        Lord mainChar = new Lord();
+        EnemyLord enemy = new EnemyLord();
+        System.out.println(mainChar.getInfo());
+        System.out.println(enemy.getInfo());
+        //System.out.println(mainChar);
+        //System.out.println(enemy);
         /*mainChar.setExp(160);
         if (mainChar.isLevelUp()){
             mainChar.levelUp("YOOOOOOOO");
             System.out.println(mainChar);
         }
         */
-        mainChar.attack(mainChar, enemy, false);
-        System.out.println(mainChar);
-        System.out.println(enemy);
+        System.out.println (mainChar.getWeapon(0).getName());
+        System.out.println (enemy.getWeapon(0).getName()); 
+        mainChar.attack(enemy, false);
+        System.out.println(mainChar.getInfo());
+        System.out.println(enemy.getInfo());
     }
     
 }

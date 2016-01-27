@@ -2,8 +2,9 @@ public class Julius extends Shepherds{
     //Total stats: 46, Growths: 18.75
     //Role: Healer, Weapons: Staffs only
     public Julius(){
-        Weapon[] inventory = new Weapon[3];
         inventory[0] = new Heal();
+        inventory[1] = new NoWeapon();
+        inventory[2] = new NoWeapon();
         name = "Julius";
         allegiance = "Shepherds";
         symbol = " H ";
@@ -21,6 +22,7 @@ public class Julius extends Shepherds{
         LUK = 7;
         maxMove = 4;
         drop = 0;
+        arrayholder = 1;
     }
     
     public void levelUp(String message){

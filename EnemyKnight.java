@@ -3,7 +3,6 @@ public class EnemyKnight extends Hylian{
     //Role: Knight, Weapons: Axes only
     public EnemyKnight(){
         FireEmblem levelChecker = new FireEmblem();
-        Weapon[] inventory = new Weapon[3];
         inventory[0] = new BronzeAxe();
         name = "Enemy Knight";
         allegiance = "Hylians";
@@ -21,6 +20,7 @@ public class EnemyKnight extends Hylian{
         LUK = 4 + (level * 3);
         maxMove = 3;
         drop = 50;
+        arrayholder = 9;
     }
     
     public void levelUp(String message){

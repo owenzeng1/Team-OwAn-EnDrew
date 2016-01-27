@@ -4,6 +4,7 @@ public class Lord extends Shepherds{
     public Lord(){
         inventory[0] = new BronzeSword();
         inventory[1] = new Wind();
+        inventory[2] = new NoWeapon();
         name = "Oliver";
         allegiance = "Shepherds";
         symbol = " L ";
@@ -20,6 +21,7 @@ public class Lord extends Shepherds{
         LUK = 5;
         maxMove = 4;
         drop = 0;
+        arrayholder = 2;
     }
     
     public void levelUp(String message){
@@ -45,9 +47,11 @@ public class Lord extends Shepherds{
     public String ToString() {
         return color + symbol;
     }
+   
     
      public static void main (String [] args) {
         Lord a = new Lord();
         System.out.println (a.getInfo());
+        System.out.println (a.getArrayHolder());
     }
 }

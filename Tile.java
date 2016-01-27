@@ -70,6 +70,7 @@ public class Tile {
         return fighter;
     }
     
+    
     /*public Unit getUnit() {
         return unit;
     } */
@@ -82,9 +83,17 @@ public class Tile {
     }
     
     public void setUnit(Unit unit) {
-        hasUnits = true;
+        this.hasUnits = true;
         this.fighter = unit;
-        
+        this.fighter.x_cor = this.x_cor;
+        this.fighter.y_cor = this.y_cor;
+        //System.out.println("Done");
+    }
+    
+    public void setBlank() {
+        Unit a = new BlankUnit();
+        this.fighter = a;
+        this.hasUnits = false;
     }
     //=========================================================
     
@@ -102,10 +111,11 @@ public class Tile {
         Tile a = new Tile(0, 6, 6);
         Lord b = new Lord();
         a.setUnit (b);
-        System.out.println (a.fighter.getx_cor());
-        System.out.println (a.getX_cor());
-        System.out.println (a.getY_cor());
-        System.out.println(a.getInfo());
+        System.out.println(a.getFighter().getArrayHolder());
+       // System.out.println (a.fighter.getx_cor());
+        //System.out.println (a.getX_cor());
+        //System.out.println (a.getY_cor());
+        //System.out.println(a.getInfo());
         System.out.println(a.getHasUnits());
         System.out.println(a.getTerrain());
         System.out.println(a);

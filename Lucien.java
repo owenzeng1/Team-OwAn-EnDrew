@@ -2,8 +2,9 @@ public class Lucien extends Shepherds{
     //Total stats: 49, Growths: 19.25
     //Role: Myrmidon, Weapons: Sword only
     public Lucien(){
-        Weapon[] inventory = new Weapon[3];
         inventory[0] = new BronzeSword();
+        inventory[1] = new NoWeapon();
+        inventory[2] = new NoWeapon();
         name = "Lucien";
         allegiance = "Shepherds";
         symbol = " S ";
@@ -21,6 +22,7 @@ public class Lucien extends Shepherds{
         LUK = 6;
         maxMove = 4;
         drop = 0;
+        arrayholder = 3;
     }
     
     public void levelUp(String message){
