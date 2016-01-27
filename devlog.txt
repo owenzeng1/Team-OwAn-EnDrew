@@ -1,0 +1,50 @@
+Andrew Lin 01-11-16
+	  -Updated Tile.java
+	    -Added Accessor for instance Vars
+	    -Added Mutators for instance Vars
+	    -Added a toString + getInfo method
+	    -Fully tested as of now
+	    
+	  -Updated Board.java
+	    -Updated toString. Prints out board
+	    
+	Owen Zeng 01-11-16
+	  -Created all units and added each units stats
+	    - Archer.java
+	    - Cavalier.java
+	    - Cleric.java
+	    - Knight.java
+	    - Lord.java
+	    - Myrmidon.java
+	  -Created all weapons
+	  -Minor changes to Tile.java for the sake of asthetics
+	  -Started work on FireEmblem.java (the driver)
+	  -Brainstormed the plot/story of the game
+	  
+	Andrew Lin 01-13-16
+	  -Fixed Map Asthetics
+	  -Improved functionality for creating better/more logical maps
+	  -In the process of turning this program into a map editing software....
+	  
+	Owen Zeng 01-13-16
+	  -Creation of Character.java as an interface for all the characters
+	  -Started coding main method of driver class FireEmblem.java
+	  -Created all basic weapons besides Bows Tomes and Staves
+	    -Bronze
+	    -Iron
+	    -Steel
+	    -Silver
+	  -Researched actual Fire Emblem damage formulas
+	
+
+	Andrew Lin 01-14-16
+	  -Described a method to implement board creation
+	  -Described a method to implement a way to store default maps (hardcoding)
+	  -Edited toString method in board.java to allow above implementations
+	  -Created a crt() class in FireEmblem.java to hold the alogrithm of map creations.
+	  -Implement a name in board.java to facilitate interaction between map selection/organization
+	  
+	Andrew Lin 01-27-16
+	  -Implemented Attack, Move for player. 
+	  -Coded AI. 
+	  -Game play working
