@@ -1,0 +1,26 @@
+Andrew Lin 
+  -Need to hardcode at least two default board using map making algorithm (1/21) 
+  -Need to implement necessary exceptions in Board.java (1/21)
+  -Create Shops.java  (1/25) 
+      -Implement necessary methods and instance vars, such as buying object
+      
+Owen Zeng
+  -Implementation of "special" weapons (1 for each category) and ranged weapons: magic tomes an staves (1/16)
+  -Enemy characters and the AI.... (1/18)
+  -Level planning (indefinite, getting the game to work first is most important)
+  -Implementation of the attack function (1/15)
+    -accuracy
+    -evasion
+    -crit chance
+    -counter attack
+    -double strike (if speed is 5 higher than opponent)
+    -durability decreasing and weapons breaking
+  -Main method for driver class FireEmblem.java
+    -plot
+    -
+Both 
+  -Colors?? (indefinite, getting the game to work first is most important)
+  -Figure out how to implement an Inventory (we are having a slight debate over who should take care of this, whether it should be a part of the Tile's elements (Andrew) or a part of the Characters (Owen).
+  
+Status API Training Shop Blog About Pricing
+© 2016 GitHub, I
